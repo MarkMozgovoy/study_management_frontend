@@ -1,5 +1,25 @@
-# Electron Demo
-This is an application I created to showcase the electron framework!
+# README #
 
-There is also a video about this project:
-https://www.youtube.com/watch?v=ZHeP0ugMoqo
+This README would normally document whatever steps are necessary to get your application up and running.
+
+### What is this repository for? ###
+
+* Quick summary
+* Version
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Wireframe of the whole app.
+
+### How do I get set up? ###
+
+* Summary of set up
+* Configuration
+* Dependencies
+* Database configuration
+* How to run tests
+* Deployment instructions
+
+To clone use 
+
+```bash
+git clone https://bitbucket.org/cus1166studymanagement/electron
+```
