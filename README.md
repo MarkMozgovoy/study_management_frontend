@@ -21,5 +21,5 @@ Wireframe of the whole app.
 To clone use 
 
 ```bash
-git clone https://bitbucket.org/cus1166studymanagement/electron/src
+git clone https://bitbucket.org/cus1166studymanagement/electron
 ```
