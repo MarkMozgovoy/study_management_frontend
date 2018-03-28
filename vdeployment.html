@@ -1,0 +1,66 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Electron Demo</title>
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script type="text/javascript" src="js/vdeployment.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <h4 style = "margin-bottom:-50px">View Deployment</h4>
+      <div class="two columns" style="float:right; width:24%; ">
+        <label for="back" class="invisible">x</label>
+        <!--	<input class="button-primary" value="Add" id="add" type="button">	-->
+        <!-- <a href="conductresearch.html"><input class="button-primary" value="DEPLOY" type="button"></a href> -->
+        <a href="view.html"><input class="button-primary" value="BACK" id="back" type="button"></a href>
+      </div>
+      <div class="me">
+      <div class="two columns" style="float:right; width:15%; ">
+        <label for="pause" class="invisible">x</label>
+        <input class="button-primary" value="PAUSE" id="pause" type="button">
+      </div>
+      <div class="two columns" style="float:right; width:15%; margin-left:-4%; ">
+        <label for="reactivate" class="invisible">x</label>
+        <input class="button-primary" value="REACTIVATE" id="reactivate" type="button">
+      </div>
+      <div class="two columns" style="float:right; width:15%; ">
+        <label for="stop" class="invisible">x</label>
+        <input class="button-primary" value="STOP" id="stop" type="button">
+      </div>
+    </div>
+    <table class="u-full-width" style="float:right; margin-top:10px; width:80%;">
+      <!-- <thead>
+        <tr>
+          <th>Study: {</th>
+          <th></th>
+        </tr>
+      </thead> -->
+      <tbody id="tablebody">
+      </tbody>
+    </table>
+    <div class="loveme" style="width:40%; text-align:left; margin-top:20%;">
+      <h5>deployment data {</h5>
+      <h6 id="id">Id stations:</h6>
+      <h6 id="t_demogra">Target demographic:</h6>
+      <h6 id="t_samplesize">Target samplesize:</h6>
+      <h6 id="type">Completed test:</h6>
+      <h6 id="date_started">Date terminated:</h6>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+// document.getElementsByTagName("th")[0].innerHTML = "hello";
+
+    var remote = require('electron').remote;
+    document.addEventListener('keydown', function (e) {
+      if (e.which === 123) {
+        remote.getCurrentWindow().webContents.openDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
+</script>
+</body>
+</html>

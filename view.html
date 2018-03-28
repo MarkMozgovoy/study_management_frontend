@@ -1,0 +1,58 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Electron Demo</title>
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script type="text/javascript" src="js/view.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <h4 style = "margin-bottom:-50px">Study Info:</h4>
+      <div class="two columns" style="float:right; width:24%; ">
+        <label for="add" class="invisible">x</label>
+        <!--	<input class="button-primary" value="Add" id="add" type="button">	-->
+        <a href="conductresearch.html"><input class="button-primary" value="DEPLOY" type="button"></a href>
+        <a href="index.html"><input class="button-primary" value="BACK" type="button"></a href>
+      </div>
+    <table class="u-full-width" style="float:right; margin-top:10px; width:80%;">
+      <thead>
+        <tr>
+          <th>Study: {</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+      </tbody>
+    </table>
+    <div class="loveme" style="width:40%; text-align:left; margin-top:20%;">
+      <h5>Study {</h5>
+      <h6 id="id">id:</h6>
+      <h6 id="name">name:</h6>
+      <h6 id="owner_id">owner_id:</h6>
+      <h6 id="type">type:</h6>
+      <h6 id="date_created">date_created:</h6>
+      <h6 id="date_modified">date_modified:</h6>
+      <h6 id="equipment_required">equipment_required:</h6>
+      <h6 id="status">status:</h6>
+      <h6 id="archived">archived:</h6>
+      <h6 id="description">description:</h6>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+// document.getElementsByTagName("th")[0].innerHTML = "hello";
+
+    var remote = require('electron').remote;
+    document.addEventListener('keydown', function (e) {
+      if (e.which === 123) {
+        remote.getCurrentWindow().webContents.openDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
+</script>
+</body>
+</html>
