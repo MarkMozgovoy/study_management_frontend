@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import {
   ADD_STUDY,
   EDIT_STUDY
+  ADD_DEPLOYMENT
+  EDIT_DEPLOYMENT
 } from './actions'
 
 //TODO add/fix the reducers below, make sure the attributes of studies are correct
@@ -45,9 +47,42 @@ function studies(state = [], action) {
   }
 }
 
+//TODO by gabby
+function deployments(state = [], action) {
+  switch (action.type) {
+    case ADD_DEPLOYMENT:
+      return [
+        ...state,
+        {
+          studyid: action.studyid,
+          id: action.id,
+          goal_samplesize: action.goal_samplesize,
+          current_samplesize: action.current_samplesize,
+          researchStation_id: action.researchStation_id,
+          status: action.status,
+          dateCreated: action.dateCreated,
+          dateModified: action.dateModified
+        }
+      ]
+    case EDIT_DEPLOYMENT:
+      return state.map((deployment, index) => {
+        if (deployment.id === action.id) {
+          return Object.assign({}, deployment, {
+            current_samplesize: action.current_samplesize,
+            status: action.status,
+            modificationDate: action.modificationDate
+          })
+        }
+        return deployment
+      })
+
+    default:
+      return state
+  }
+}
 //TODO add other reducers to the combineReducers function
 const studyApp = combineReducers({
-  studies
+  studies, deployments
 })
  
 export default studyApp

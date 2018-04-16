@@ -6,8 +6,8 @@
   "scripts": {
     "start": "electron ."
   },
-  "author": "Simon Schiller",
-  "license": "MIT",
+  "author": "CUS1166",
+  "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.8.4",
     "electron-compilers": "^5.9.0",
