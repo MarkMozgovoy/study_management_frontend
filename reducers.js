@@ -6,6 +6,10 @@ import {
   EDIT_DEPLOYMENT
 } from './actions'
 
+//TODO initialize state out here to make it not initialize as empty
+
+//STATE will be as follows: [accesstoken, idtoken, viewcondition, ...studies]
+
 //TODO add/fix the reducers below, make sure the attributes of studies are correct
 function studies(state = [], action) {
   switch (action.type) {
@@ -22,7 +26,9 @@ function studies(state = [], action) {
           experimentScript: action.experimentScript,
           resourcesData: action.resourcesData,
           protocol: action.protocol,
-          equipment: action.equipment
+          equipment: [],
+          deployments: [],
+
         }
       ]
     case EDIT_STUDY:
@@ -36,7 +42,7 @@ function studies(state = [], action) {
             experimentScript: action.experimentScript,
             resourcesData: action.resourcesData,
             protocol: action.protocol,
-            equipment: action.equipment
+            equipment: []
           })
         }
         return study

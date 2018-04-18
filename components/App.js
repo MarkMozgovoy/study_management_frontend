@@ -8,7 +8,7 @@ const App = () => (
   <div>
     <AddStudy />
     <AddDeployment />
-    <h1>HELLO!</h1>
+    
   </div>
 )
 
