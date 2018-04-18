@@ -1,50 +1,17 @@
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Electron Demo</title>
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/index.css">
-  <script type="text/javascript" src="js/index.js"></script>
+  <title>Study Application</title>
+
 </head>
 <body>
-  <div class="container">
+  <div id = 'root'>
 
-    <h3>DASHBOARD</H3>
-      <h4 style = "margin-bottom:-50px">List of study cases:</h4>
-        <div class="two columns" style="float:right; width:24%; ">
-          <label for="add" class="invisible">x</label>
-          <!--	<input class="button-primary" value="Create Study" id="add" type="button">	-->
-          <a href="about.html"><input class="button-primary" value="Create Study" type="button"></a href>
-          <input class="button-primary" value="UPLOAD" id="UPLOAD" type="button">
-        </div>
-      <table class="u-full-width">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Study Name</th>
-            <th>Study Owner</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="tablebody">
-        </tbody>
-      </table>
-    </div>
-
-
-
-    
-
-  <script type="text/javascript">
-    var remote = require('electron').remote;
-    document.addEventListener('keydown', function (e) {
-      if (e.which === 123) {
-        remote.getCurrentWindow().webContents.openDevTools();
-      } else if (e.which === 116) {
-        location.reload();
-      }
-    });
-</script>
+  </div>
+  <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
 </body>
 </html>

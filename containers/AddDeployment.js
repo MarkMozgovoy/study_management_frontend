@@ -8,7 +8,6 @@ let AddDeployment = ({ dispath }) => {
   return (
     <div>
       <form>
-// adding deployment form
         <button type="submit">
           Add Deployment
         </button>

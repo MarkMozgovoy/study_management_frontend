@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import {
   ADD_STUDY,
-  EDIT_STUDY
-  ADD_DEPLOYMENT
+  EDIT_STUDY,
+  ADD_DEPLOYMENT,
   EDIT_DEPLOYMENT
 } from './actions'
 

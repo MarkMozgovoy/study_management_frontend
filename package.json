@@ -1,12 +1,23 @@
 {
-  "name": "electron-demo",
+  "name": "electron-quick-start",
   "version": "1.0.0",
-  "description": "Electron demo app for a school presentation",
+  "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "author": "CUS1166",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.8.4",
@@ -14,13 +25,15 @@
     "electron-prebuilt-compile": "^1.8.4",
     "redux-devtools": "^3.4.1"
   },
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "https://github.com/electron/electron-quick-start#readme",
   "dependencies": {
     "electron-compile": "^6.4.2",
     "electron-redux": "^1.3.1",
-    "nedb": "^1.8.0",
-    "npm": "^5.8.0",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2"
   }

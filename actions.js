@@ -5,7 +5,7 @@ export const EDIT_DEPLOYMENT = 'EDIT_DEPLOYMENT';
 
 //TODO add other parameters if necessary
 export function addStudy(title, studyType, id, owner, creationDate, modificationDate, experimentScript, resourcesData, protocol, equipment){
-  return {type:ADD_STUDY, title, studyType, id, owner, creationDate, modificationDate, experimentScript, resourcesData, protocol, equipment}
+  return {type: ADD_STUDY, title, studyType, id, owner, creationDate, modificationDate, experimentScript, resourcesData, protocol, equipment}
 }
 
 export function editStudy(title, studyType, owner, modificationDate, experimentScript, resourcesData, protocol, equipment){
