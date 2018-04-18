@@ -8,7 +8,7 @@ import {
 
 //TODO initialize state out here to make it not initialize as empty
 
-//STATE will be as follows: [accesstoken, viewcondition, ...studies]
+//STATE will be as follows: [accesstoken, idtoken, viewcondition, ...studies]
 
 //TODO add/fix the reducers below, make sure the attributes of studies are correct
 function studies(state = [], action) {
