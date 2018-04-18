@@ -61,7 +61,8 @@ function deployments(state = [], action) {
           researchStation_id: action.researchStation_id,
           status: action.status,
           dateCreated: action.dateCreated,
-          dateModified: action.dateModified
+          dateModified: action.dateModified,
+          deployments: [] //identify the deployment to study
         }
       ]
     case EDIT_DEPLOYMENT:
