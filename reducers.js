@@ -26,7 +26,7 @@ function studies(state = [], action) {
           experimentScript: action.experimentScript,
           resourcesData: action.resourcesData,
           protocol: action.protocol,
-          equipment: [],
+          equipment: action.equipment,//will be array
           deployments: [],
 
         }
