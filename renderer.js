@@ -5,6 +5,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import ReactDOM from 'react-dom'
 import studyApp from './reducers'
 
 //TODO create an app component using other react components
@@ -14,9 +15,9 @@ let store = createStore(studyApp);
 window.store = store;
 
 //TODO create a render function to display the app component
- render(
+ReactDOM.render(
    <Provider store={store}>
-     <App />
+   <App />
    </Provider>,
    document.getElementById('root')
  )
