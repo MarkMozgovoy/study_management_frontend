@@ -9,6 +9,8 @@ import {
 //TODO initialize state out here to make it not initialize as empty
 
 //STATE will be as follows: [accesstoken, idtoken, viewcondition, ...studies]
+//study {name (string), description (string), ...} CHECK JOHN'S CODE FOR PROPER NAMES
+
 
 //TODO add/fix the reducers below, make sure the attributes of studies are correct
 function studies(state = [], action) {
@@ -17,17 +19,17 @@ function studies(state = [], action) {
       return [
         ...state,
         {
-          title: action.title,
-          studyType: action.studyType,
-          id: action.id,
-          owner: action.owner,
-          creationDate: action.creationDate,
-          modificationDate: action.modificationDate,
-          experimentScript: action.experimentScript,
-          resourcesData: action.resourcesData,
-          protocol: action.protocol,
-          equipment: action.equipment,//will be array
-          deployments: [],
+          title: action.title,//string
+          studyType: action.studyType,//remove
+          id: action.id,//remove
+          owner: action.owner,//remove
+          creationDate: action.creationDate,//remove
+          modificationDate: action.modificationDate,//string when updating
+          experimentScript: action.experimentScript,//file
+          resourcesData: action.resourcesData,//zip file
+          protocol: action.protocol,//string
+          equipment: action.equipment,//will be array of equipment objects
+          deployments: [],//remove
 
         }
       ]
@@ -37,7 +39,7 @@ function studies(state = [], action) {
           return Object.assign({}, study, {
             title: action.title,
             studyType: action.studyType,
-            owner: action.owner,
+            owner: action.owner,//email or something, own endpoint
             modificationDate: action.modificationDate,
             experimentScript: action.experimentScript,
             resourcesData: action.resourcesData,
