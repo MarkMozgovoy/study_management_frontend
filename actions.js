@@ -8,7 +8,7 @@ export function addStudy(title, studyType, id, owner, creationDate, modification
   return {type: ADD_STUDY, title, studyType, id, owner, creationDate, modificationDate, experimentScript, resourcesData, protocol, equipment}
 }
 
-export function editStudy(title, studyType, id, owner, modificationDate, experimentScript, resourcesData, protocol, equipment){
+export function editStudy(title, studyType, owner, modificationDate, experimentScript, resourcesData, protocol, equipment){
   return {type: EDIT_STUDY, title, studyType, id, owner, modificationDate, experimentScript, resourcesData, protocol, equipment}
 }
 
@@ -21,3 +21,18 @@ export function editDeployment(current_samplesize, status, modificationDate){
 }
 
 //TODO add other actions as necessary
+
+export const selectUser = (user) => {
+  console.log("you clicked on user:", user.title);
+  return {
+    type: "USER_SELECTED",
+    payload: user
+  }
+}
+export const selectDeployment = (dplymnt) => {
+  console.log("you clicked on deployment:", dplymnt.id);
+  return {
+    type: "DEPLOYMENT_SELECTED",
+    payload: dplymnt
+  }
+}

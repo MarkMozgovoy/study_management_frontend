@@ -9,8 +9,6 @@ import {
 //TODO initialize state out here to make it not initialize as empty
 
 //STATE will be as follows: [accesstoken, idtoken, viewcondition, ...studies]
-//study {name (string), description (string), ...} CHECK JOHN'S CODE FOR PROPER NAMES
-
 
 //TODO add/fix the reducers below, make sure the attributes of studies are correct
 function studies(state = [], action) {
@@ -19,17 +17,17 @@ function studies(state = [], action) {
       return [
         ...state,
         {
-          title: action.title,//string
-          studyType: action.studyType,//remove
-          id: action.id,//remove
-          owner: action.owner,//remove
-          creationDate: action.creationDate,//remove
-          modificationDate: action.modificationDate,//string when updating
-          experimentScript: action.experimentScript,//file
-          resourcesData: action.resourcesData,//zip file
-          protocol: action.protocol,//string
-          equipment: action.equipment,//will be array of equipment objects
-          deployments: [],//remove
+          title: action.title,
+          studyType: action.studyType,
+          id: action.id,
+          owner: action.owner,
+          creationDate: action.creationDate,
+          modificationDate: action.modificationDate,
+          experimentScript: action.experimentScript,
+          resourcesData: action.resourcesData,
+          protocol: action.protocol,
+          equipment: action.equipment,//will be array
+          deployments: [],
 
         }
       ]
@@ -39,7 +37,7 @@ function studies(state = [], action) {
           return Object.assign({}, study, {
             title: action.title,
             studyType: action.studyType,
-            owner: action.owner,//email or something, own endpoint
+            owner: action.owner,
             modificationDate: action.modificationDate,
             experimentScript: action.experimentScript,
             resourcesData: action.resourcesData,
@@ -54,7 +52,16 @@ function studies(state = [], action) {
       return state
   }
 }
-
+// -- comment -- //
+function activestudy(state=null, action) {
+  switch (action.type) {
+      case "USER_SELECTED":
+        return action.payload;
+        break;
+  }
+  return state;
+}
+// -- comment -- //
 //TODO by gabby
 function deployments(state = [], action) {
   switch (action.type) {
@@ -64,6 +71,7 @@ function deployments(state = [], action) {
         {
           studyid: action.studyid,
           id: action.id,
+          name: action.name,
           goal_samplesize: action.goal_samplesize,
           current_samplesize: action.current_samplesize,
           researchStation_id: action.researchStation_id,
@@ -89,9 +97,13 @@ function deployments(state = [], action) {
       return state
   }
 }
+
+
 //TODO add other reducers to the combineReducers function
 const studyApp = combineReducers({
-  studies, deployments
+  studies,
+  deployments,
+  activestudy
 })
  
 export default studyApp
