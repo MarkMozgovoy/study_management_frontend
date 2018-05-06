@@ -6,6 +6,17 @@ import { addDeployment} from '../actions'
 //     input = node
 //   }}
 // />
+
+var test;
+fetch('http://localhost:5000/studies')
+    .then(response => response.json()) // response.json() returns a promise
+    .then((response) => {
+      console.log("I have friends!", response); //returns all of johnbob's friends
+      test = response;
+      alert(JSON.stringify(test[0]));
+    })
+
+
 let AddDeployment = ({ dispatch }) => {
   let inputStudyid
   let inputId
@@ -34,7 +45,7 @@ let AddDeployment = ({ dispatch }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(window.store.getState().deployments[window.store.getState().deployments.length-1]),
+      body: JSON.stringify(window.store.getState().activestudy[window.store.getState().activestudy.deployments.length-1]),
     })
     .then(response => response.json()) // response.json() returns a promise
     .then((response) => {

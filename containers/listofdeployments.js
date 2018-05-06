@@ -52,7 +52,7 @@ createListItems() {
 
 function mapStateToProps(state) {
   return {
-    dplmts: state.deployments,
+    dplmts: state.activestudy.deployments,
     user: state.activestudy
   }
 }
