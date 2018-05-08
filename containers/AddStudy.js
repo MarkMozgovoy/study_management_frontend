@@ -7,71 +7,79 @@ import { addStudy } from '../actions'
 //   }}
 // />
 let AddStudy = ({ dispatch }) => {
-  let inputType
-  let inputId
   let inputTitle
-  let inputOwner
-  let inputDOC
-  let inputLastModified
   let inputExperimentScript
   let inputResources
-  let inputProtocol
-  let inputEquipment
+  let inputDescription
+  let inputEquipment1
+  let inputEquipment2
 
 //TODO fix trim
   return (
     <div>
       <form onSubmit = { e => {
         e.preventDefault()
-        if (!inputTitle.value.trim()) {
-            return
+        // if (!inputTitle.value.trim()) {
+        //     return
+        //   }
+          //inputId.value = '';[
+
+          let listOfEquipment = [];
+          if(document.getElementById("equipment1").checked){
+            listOfEquipment.push({
+              "equipmentId": "EQUIPMENT:1ce35761-867d-4d02-9706-ce516c5df4ae",
+              "name": "Electrocardiogram",
+              "abbreviation": "EKG"
+            })
           }
-          dispatch(addStudy(inputTitle.value, inputType.value, inputId.value, inputOwner.value, inputDOC.value,
-            inputLastModified.value, inputExperimentScript.value, inputResources.value, inputProtocol.value,
-            inputEquipment.value))
-          inputId.value = '';
-          fetch('http://rest.learncode.academy/api/mmozgovoy/studies', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(window.store.getState().studies[window.store.getState().studies.length-1]),
-    })
-    .then(response => response.json()) // response.json() returns a promise
-    .then((response) => {
-      console.log("You saved this item", response); //returns the new item along with its ID
-    })
+          if(document.getElementById("equipment2").checked){
+            listOfEquipment.push({
+              "equipmentId": "EQUIPMENT:149a2e8b-7774-47ad-97c3-6c9ea3aa5f9c",
+              "name": "Eye Tracking",
+              "abbreviation": "EYE"
+            })
+          }
+          fetch('http://localhost:5000/studies', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({name: inputTitle.value, description: inputDescription.value, equipmentList: listOfEquipment}),
+          })
+          .then(response => response.json()) // response.json() returns a promise
+          .then((response) => {
+            console.log("You saved this item", response); //returns the new item along with its ID
+          })
+
+          let studyArr = [];
+          fetch('http://localhost:5000/studies')
+              .then(response => response.json()) // response.json() returns a promise
+              .then((response) => {
+                console.log("Returned Studies", response); //returns all of johnbob's friends
+                studyArr = response;
+                for (let i = 0; i < studyArr.length; i++){
+                  dispatch(addStudy(studyArr[i].name, studyArr[i].studyId, studyArr[i].dateCreated, studyArr[i].status,
+                    studyArr[i].dateModified, studyArr[i].description, studyArr[i].equipmentList, studyArr[i].deploymentList,
+                     studyArr[i].archived))
+                }
+              })
       }}>
-        <div>Type: <input type = "text" id = "type" ref={node => {
-          inputType = node
-        }} /></div>
-        <div>Id: <input type = "text" id = "id" ref={node => {
-          inputId = node
-        }} /></div>
         <div>Title: <input type = "text" id = "title" ref={node => {
           inputTitle = node
         }} /></div>
-        <div>Owner: <input type = "text" id = "owner" ref={node => {
-          inputOwner = node
-        }} /></div>
-        <div>Date of Creation: <input type = "text" id = "doc" ref={node => {
-          inputDOC = node
-        }} /></div>
-        <div>Last Modified: <input type = "text" id = "lastmod" ref={node => {
-          inputLastModified = node
-        }} /></div>
-        <div>Experiment Script: <input type = "text" id = "script" ref={node => {
+        <div>Experiment Script: <input type = "file" id = "script" ref={node => {
           inputExperimentScript = node
         }} /></div>
-        <div>Resources: <input type = "text" id = "resources" ref={node => {
+        <div>Resources: <input type = "file" id = "resources" ref={node => {
           inputResources = node
         }} /></div>
-        <div>Protocol: <input type = "text" id = "protocol" ref={node => {
-          inputProtocol = node
+        <div>Description: <input type = "text" id = "protocol" ref={node => {
+          inputDescription = node
         }} /></div>
-        <div>Equipment: <input type = "text" id = "equipment" ref={node => {
-          inputEquipment = node
-        }} /></div>
+        <div>Equipment:
+          <div><input type = "checkbox" id = "equipment1" ref={node => {inputEquipment1 = node}} />EKG</div>
+          <div><input type = "checkbox" id = "equipment2" ref={node => {inputEquipment2 = node}} />EYE</div>
+        </div>
         <button type="submit">Add Study</button>
       </form>
     </div>

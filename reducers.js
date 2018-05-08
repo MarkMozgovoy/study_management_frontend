@@ -3,12 +3,12 @@ import {
   ADD_STUDY,
   EDIT_STUDY,
   ADD_DEPLOYMENT,
-  EDIT_DEPLOYMENT
+  EDIT_DEPLOYMENT,
 } from './actions'
 
 //TODO initialize state out here to make it not initialize as empty
 
-//STATE will be as follows: [accesstoken, idtoken, viewcondition, ...studies]
+//STATE will be as follows: [accesstoken, idtoken, ...studies]
 
 //TODO add/fix the reducers below, make sure the attributes of studies are correct
 
@@ -18,20 +18,18 @@ function studies(state = [], action) {
       return [
         ...state,
         {
-          title: action.title,
-          studyType: action.studyType,
-          id: action.id,
-          owner: action.owner,
-          creationDate: action.creationDate,
-          modificationDate: action.modificationDate,
-          experimentScript: action.experimentScript,
-          resourcesData: action.resourcesData,
-          protocol: action.protocol,
-          equipment: action.equipment,//will be array
-          deployments: [],
-
+          name: action.name,
+          studyId: action.studyId,
+          dateCreated: action.dateCreated,
+          dateModified: action.dateModified,
+          description: action.description,
+          equipmentList: action.equipmentList,//will be array
+          deploymentList: action.deploymentList,
+          status: action.status,
+          archived: action.archived
         }
       ]
+
     case EDIT_STUDY:
       return state.map((study, index) => {
         if (study.id === action.id) {

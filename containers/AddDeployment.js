@@ -7,14 +7,14 @@ import { addDeployment} from '../actions'
 //   }}
 // />
 
-var test;
-fetch('http://localhost:5000/studies')
-    .then(response => response.json()) // response.json() returns a promise
-    .then((response) => {
-      console.log("I have friends!", response); //returns all of johnbob's friends
-      test = response;
-      alert(JSON.stringify(test[0]));
-    })
+// var test;
+// fetch('http://localhost:5000/studies')
+//     .then(response => response.json()) // response.json() returns a promise
+//     .then((response) => {
+//       console.log("I have friends!", response); //returns all of johnbob's friends
+//       test = response;
+//       alert(JSON.stringify(test[0]));
+//     })
 
 
 let AddDeployment = ({ dispatch }) => {

@@ -4,8 +4,8 @@ export const ADD_DEPLOYMENT = 'ADD_DEPLOYMENT';
 export const EDIT_DEPLOYMENT = 'EDIT_DEPLOYMENT';
 
 //TODO add other parameters if necessary
-export function addStudy(title, studyType, id, owner, creationDate, modificationDate, experimentScript, resourcesData, protocol, equipment){
-  return {type: ADD_STUDY, title, studyType, id, owner, creationDate, modificationDate, experimentScript, resourcesData, protocol, equipment}
+export function addStudy(name, studyId, dateCreated, status, dateModified, description, equipmentList, deploymentList, archived){
+  return {type: ADD_STUDY, name, studyId, dateCreated, status, dateModified, description, equipmentList, deploymentList, archived}
 }
 
 export function editStudy(title, studyType, owner, modificationDate, experimentScript, resourcesData, protocol, equipment){
@@ -19,6 +19,7 @@ export function addDeployment(studyid, id, name, goal_samplesize, current_sample
 export function editDeployment(current_samplesize, status, modificationDate){
   return {type: EDIT_DEPLOYMENT, current_samplesize, status, modificationDate}
 }
+
 
 //TODO add other actions as necessary
 
