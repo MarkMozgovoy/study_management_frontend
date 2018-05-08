@@ -2,6 +2,7 @@ export const ADD_STUDY = 'ADD_STUDY';
 export const EDIT_STUDY = 'EDIT_STUDY';
 export const ADD_DEPLOYMENT = 'ADD_DEPLOYMENT';
 export const EDIT_DEPLOYMENT = 'EDIT_DEPLOYMENT';
+export const CLEAR_STATE = 'CLEAR_STATE';
 
 //TODO add other parameters if necessary
 export function addStudy(name, studyId, dateCreated, status, dateModified, description, equipmentList, deploymentList, archived){
@@ -20,6 +21,9 @@ export function editDeployment(current_samplesize, status, modificationDate){
   return {type: EDIT_DEPLOYMENT, current_samplesize, status, modificationDate}
 }
 
+export function clearState(){
+  return {type: CLEAR_STATE}
+}
 
 //TODO add other actions as necessary
 

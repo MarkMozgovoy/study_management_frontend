@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addStudy } from '../actions'
+import { addStudy, clearState } from '../actions'
 // <input
 //   ref={node => {
 //     input = node
@@ -57,6 +57,7 @@ let AddStudy = ({ dispatch }) => {
               .then((response) => {
                 console.log("Returned Studies", response); //returns all of johnbob's friends
                 studyArr = response;
+                dispatch(clearState());
                 for (let i = 0; i < studyArr.length; i++){
                   dispatch(addStudy(studyArr[i].name, studyArr[i].studyId, studyArr[i].dateCreated, studyArr[i].status,
                     studyArr[i].dateModified, studyArr[i].description, studyArr[i].equipmentList, studyArr[i].deploymentList,

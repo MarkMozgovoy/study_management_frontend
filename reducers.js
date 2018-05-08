@@ -4,6 +4,7 @@ import {
   EDIT_STUDY,
   ADD_DEPLOYMENT,
   EDIT_DEPLOYMENT,
+  CLEAR_STATE
 } from './actions'
 
 //TODO initialize state out here to make it not initialize as empty
@@ -46,6 +47,9 @@ function studies(state = [], action) {
         }
         return study
       })
+
+      case CLEAR_STATE:
+        return [];
 
       case ADD_DEPLOYMENT:
       return state.map((study, index) => {
