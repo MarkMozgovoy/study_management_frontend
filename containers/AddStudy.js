@@ -22,7 +22,7 @@ let AddStudy = ({ dispatch }) => {
         // if (!inputTitle.value.trim()) {
         //     return
         //   }
-          //inputId.value = '';[
+          //inputId.value = '';
 
           let listOfEquipment = [];
           if(document.getElementById("equipment1").checked){
@@ -36,7 +36,7 @@ let AddStudy = ({ dispatch }) => {
             listOfEquipment.push({
               "equipmentId": "EQUIPMENT:149a2e8b-7774-47ad-97c3-6c9ea3aa5f9c",
               "name": "Eye Tracking",
-              "abbreviation": "EYE"
+              "abbreviation": "ET"
             })
           }
           fetch('http://localhost:5000/studies', {
@@ -79,7 +79,7 @@ let AddStudy = ({ dispatch }) => {
         }} /></div>
         <div>Equipment:
           <div><input type = "checkbox" id = "equipment1" ref={node => {inputEquipment1 = node}} />EKG</div>
-          <div><input type = "checkbox" id = "equipment2" ref={node => {inputEquipment2 = node}} />EYE</div>
+          <div><input type = "checkbox" id = "equipment2" ref={node => {inputEquipment2 = node}} />ET</div>
         </div>
         <button type="submit">Add Study</button>
       </form>

@@ -14,10 +14,8 @@ class StudyDetail extends Component {
     let inputExperimentScript
     let inputResources
     let inputDescription
-    let inputEquipment1
-    let inputEquipment2
-
-
+    let inputEquipment11
+    let inputEquipment22
 
     if (!this.props.user) {
       return (<h4>Select a view</h4>);
@@ -26,18 +24,7 @@ class StudyDetail extends Component {
       return (
         <div>
         <div>
-          <form onLoad = { e => {e.preventDefault()
-            for(let i = 0; i < this.props.user.equipmentList.length; i++){
-              if(this.props.user.equipmentList[i].abbreviation === "EKG"){
-                document.getElementById("equipment11").checked = true;
-              }
-              if(this.props.user.equipmentList[i].abbreviation === "EYE"){
-                document.getElementById("equipment22").checked = true;
-              }
-            }
-          }
-        }
-            onSubmit = { e => {
+          <form onSubmit = { e => {
             e.preventDefault()
             // if (!inputTitle.value.trim()) {
             //     return
@@ -45,18 +32,18 @@ class StudyDetail extends Component {
               //inputId.value = '';[
 
               let listOfEquipment = [];
-              if(document.getElementById("equipment1").checked){
+              if(document.getElementById("equipment11").checked){
                 listOfEquipment.push({
                   "equipmentId": "EQUIPMENT:1ce35761-867d-4d02-9706-ce516c5df4ae",
                   "name": "Electrocardiogram",
                   "abbreviation": "EKG"
                 })
               }
-              if(document.getElementById("equipment2").checked){
+              if(document.getElementById("equipment22").checked){
                 listOfEquipment.push({
                   "equipmentId": "EQUIPMENT:149a2e8b-7774-47ad-97c3-6c9ea3aa5f9c",
                   "name": "Eye Tracking",
-                  "abbreviation": "EYE"
+                  "abbreviation": "ET"
                 })
               }
 
@@ -70,6 +57,17 @@ class StudyDetail extends Component {
               .then(response => response.json()) // response.json() returns a promise
               .then((response) => {
                 console.log("You saved this item", response); //returns the new item along with its ID
+              })
+
+              fetch('http://localhost:5000/studies', {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({name: inputTitle.value, description: inputDescription.value, equipmentList: listOfEquipment}),
+              })
+              .then((response) => {
+                console.log("Update success!", response.status); //returns 200 ok
               })
 
               let studyArr = [];
@@ -99,8 +97,8 @@ class StudyDetail extends Component {
               inputDescription = node
             }} /></div>
             <div>Equipment:
-              <div><input type = "checkbox" id = "equipment11" ref={node => {inputEquipment1 = node}} />EKG</div>
-              <div><input type = "checkbox" id = "equipment22" ref={node => {inputEquipment2 = node}} />EYE</div>
+              <div><input type = "checkbox" id = "equipment11" defaultChecked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "EKG") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "EKG")) ? true : false} ref={node => {inputEquipment11 = node}} />EKG</div>
+              <div><input type = "checkbox" id = "equipment22" defaultChecked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "ET") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "ET")) ? true : false} ref={node => {inputEquipment22 = node}} />ET</div>
             </div>
             <button type="submit">Edit Study</button>
           </form>

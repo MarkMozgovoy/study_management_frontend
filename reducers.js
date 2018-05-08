@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 import {
   ADD_STUDY,
-  EDIT_STUDY,
   ADD_DEPLOYMENT,
   EDIT_DEPLOYMENT,
   CLEAR_STATE
@@ -30,23 +29,6 @@ function studies(state = [], action) {
           archived: action.archived
         }
       ]
-
-    case EDIT_STUDY:
-      return state.map((study, index) => {
-        if (study.id === action.id) {
-          return Object.assign({}, study, {
-            title: action.title,
-            studyType: action.studyType,
-            owner: action.owner,
-            modificationDate: action.modificationDate,
-            experimentScript: action.experimentScript,
-            resourcesData: action.resourcesData,
-            protocol: action.protocol,
-            equipment: []
-          })
-        }
-        return study
-      })
 
       case CLEAR_STATE:
         return [];
