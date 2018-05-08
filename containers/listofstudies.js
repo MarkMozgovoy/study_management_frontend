@@ -10,15 +10,12 @@ createListItems() {
   return this.props.users.map((user) => {
     return(
       <li
-        key ={user.id}
+        key ={user.studyId}
         onClick={() => this.props.selectUser(user)}
       >
-        {user.id},
-        {user.studyType},
-        {user.title},
-        {user.owner},
-        {user.creationDate},
-        {user.experimentScript}
+        {user.studyId},
+        {user.name},
+        {user.dateCreated}
       </li>
           );
   });
