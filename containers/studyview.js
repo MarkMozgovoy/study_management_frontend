@@ -7,7 +7,15 @@ import { addStudy, clearState } from '../actions'
 
 class StudyDetail extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {value: ''};
+    this.handleChange = this.handleChange.bind(this);
+  }
 
+  handleChange(event){
+    this.setState({value: event.target.value});
+  }
 
   render() {
     let inputTitle
@@ -16,6 +24,7 @@ class StudyDetail extends Component {
     let inputDescription
     let inputEquipment11
     let inputEquipment22
+    let inputOwner
 
     if (!this.props.user) {
       return (<h4>Select a view</h4>);
@@ -46,6 +55,18 @@ class StudyDetail extends Component {
                   "abbreviation": "ET"
                 })
               }
+
+              fetch('http://localhost:5000/studies/' + this.props.user.studyId + '/permissions', {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({userId: inputOwner.value, studyId: this.props.user.studyId}),
+              })
+              .then(response => response.json()) // response.json() returns a promise
+              .then((response) => {
+                console.log("Owner added", response); //returns the new item along with its ID
+              })
 
               fetch('http://localhost:5000/studies', {
                 method: "POST",
@@ -84,8 +105,11 @@ class StudyDetail extends Component {
                     }
                   })
           }}>
-            <div>Title: <input type = "text" id = "title" defaultValue = {this.props.user.name} ref={node => {
+            <div>Title: <input type = "text" id = "title" value = {this.props.user.name} onChange = {this.handleChange} ref={node => {
               inputTitle = node
+            }} /></div>
+            <div>Add Owner: <input type = "text" id = "newowner" ref={node => {
+              inputOwner = node
             }} /></div>
             <div>Experiment Script: <input type = "file" id = "script" ref={node => {
               inputExperimentScript = node
@@ -93,12 +117,12 @@ class StudyDetail extends Component {
             <div>Resources: <input type = "file" id = "resources" ref={node => {
               inputResources = node
             }} /></div>
-            <div>Description: <input type = "text" id = "protocol" defaultValue = {this.props.user.description} ref={node => {
+            <div>Description: <input type = "text" id = "protocol" value = {this.props.user.description} onChange = {this.handleChange} ref={node => {
               inputDescription = node
             }} /></div>
             <div>Equipment:
-              <div><input type = "checkbox" id = "equipment11" defaultChecked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "EKG") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "EKG")) ? true : false} ref={node => {inputEquipment11 = node}} />EKG</div>
-              <div><input type = "checkbox" id = "equipment22" defaultChecked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "ET") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "ET")) ? true : false} ref={node => {inputEquipment22 = node}} />ET</div>
+              <div><input type = "checkbox" id = "equipment11" onChange = {this.handleChange} checked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "EKG") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "EKG")) ? true : false} ref={node => {inputEquipment11 = node}} />EKG</div>
+              <div><input type = "checkbox" id = "equipment22" onChange = {this.handleChange} checked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "ET") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "ET")) ? true : false} ref={node => {inputEquipment22 = node}} />ET</div>
             </div>
             <button type="submit">Edit Study</button>
           </form>
