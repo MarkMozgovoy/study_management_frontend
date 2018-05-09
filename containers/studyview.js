@@ -9,7 +9,7 @@ class StudyDetail extends Component {
 
   constructor(props){
     super(props);
-    this.state = {value: ''};
+    this.state = {value : ''};
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -25,6 +25,8 @@ class StudyDetail extends Component {
     let inputEquipment11
     let inputEquipment22
     let inputOwner
+    let inputStatus
+    let experiment
 
     if (!this.props.user) {
       return (<h4>Select a view</h4>);
@@ -109,24 +111,12 @@ class StudyDetail extends Component {
                 console.log("Owner added", response); //returns the new item along with its ID
               })
 
-              fetch('http://localhost:5000/studies', {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({name: inputTitle.value, description: inputDescription.value, equipmentList: listOfEquipment}),
-              })
-              .then(response => response.json()) // response.json() returns a promise
-              .then((response) => {
-                console.log("You saved this item", response); //returns the new item along with its ID
-              })
-
-              fetch('http://localhost:5000/studies', {
+              fetch('http://localhost:5000/studies/' + this.props.user.studyId + '', {
                 method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name: inputTitle.value, description: inputDescription.value, equipmentList: listOfEquipment}),
+                body: JSON.stringify({studyId: this.props.user.studyId, name: inputTitle.value, description: inputDescription.value, equipmentList: listOfEquipment, dateCreated: this.props.user.dateCreated, dateModified: this.props.user.dateModified, status: inputStatus.value}),
               })
               .then((response) => {
                 console.log("Update success!", response.status); //returns 200 ok
@@ -146,27 +136,30 @@ class StudyDetail extends Component {
                     }
                   })
           }}>
-            <div>Title: <input type = "text" id = "title" value = {this.props.user.name} onChange = {this.handleChange} ref={node => {
+            <div>Study ID: {this.props.user.studyId}</div>
+            <div>Title: <input type = "text" name = "title" ref={node => {
               inputTitle = node
-            }} /></div>
+            }} />{this.props.user.name}</div>
             <div>Add Owner: <input type = "text" id = "newowner" ref={node => {
               inputOwner = node
             }} /></div>
+            <div>Status: <input type = "text" id = "stats" ref={node => {
+              inputStatus = node
+            }} />{this.props.user.status}</div>
             <div>Experiment Script: <input type = "file" id = "script" ref={node => {
               inputExperimentScript = node
             }} /></div>
             <div>Resources: <input type = "file" id = "resources" ref={node => {
               inputResources = node
             }} /></div>
-            <div>Description: <input type = "text" id = "protocol" value = {this.props.user.description} onChange = {this.handleChange} ref={node => {
+            <div>Description: <input type = "text" id = "protocol" ref={node => {
               inputDescription = node
-            }} /></div>
+            }} />{this.props.user.description}</div>
             <div>Date Created: {this.props.user.dateCreated} </div>
             <div>Date Modified: {this.props.user.dateModified} </div>
-            <div>Status: {this.props.user.status} </div>
             <div>Equipment:
-              <div><input type = "checkbox" id = "equipment11" onChange = {this.handleChange} checked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "EKG") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "EKG")) ? true : false} ref={node => {inputEquipment11 = node}} />EKG</div>
-              <div><input type = "checkbox" id = "equipment22" onChange = {this.handleChange} checked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "ET") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "ET")) ? true : false} ref={node => {inputEquipment22 = node}} />ET</div>
+              <div><input type = "checkbox" id = "equipment11" ref={node => {inputEquipment11 = node}} />EKG, {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "EKG")) ? "has EKG" : ""}</div>
+              <div><input type = "checkbox" id = "equipment22" ref={node => {inputEquipment22 = node}} />ET, {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "ET") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "ET")) ? "has ET" : ""}</div>
             </div>
             <button type="submit">Edit Study</button>
           </form>
