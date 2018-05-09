@@ -10,7 +10,9 @@ createListItems() {
     return(
       <tr key={study.studyId} onClick={()=>this.props.selectStudy(study)}>
         <td><div> {study.name} </div></td>
+        <td><div> {study.status} </div></td>
         <td><div> {study.dateCreated.slice(0,10)} </div></td>
+        <td><div> {study.dateModified.slice(0,10)} </div></td>
       </tr>
     );
   });
@@ -31,7 +33,9 @@ createListItems() {
               <thead>
                 <tr>
                   <th> Name </th>
+                  <th> Status </th>
                   <th> Date Created </th>
+                  <th> Date Modified </th>
                 </tr>
               </thead>
               <tbody> {this.createListItems()} </tbody>
