@@ -13,6 +13,8 @@ let AddStudy = ({ dispatch }) => {
   let inputDescription
   let inputEquipment1
   let inputEquipment2
+  let inputExperimentSkip
+  let experiment
 
 //TODO fix trim
   return (
@@ -39,6 +41,48 @@ let AddStudy = ({ dispatch }) => {
               "abbreviation": "ET"
             })
           }
+
+          //logic for submitting a file
+          if(inputExperimentScript != null){
+            experiment = inputExperimentScript;
+          } else if(inputExperimentSkip === ''){
+            var sampleFile = new XMLHttpRequest();
+            var data;
+            sampleFile.open("GET", "../experiment.osexp", false);
+            sampleFile.onreadystatechange = function ()
+            {
+                if(sampleFile.readyState === 4)
+                {
+                    if(sampleFile.status === 200 || sampleFile.status == 0)
+                    {
+                        data = sampleFile.responseText;
+                        //alert(allText);
+                    }
+                }
+            }
+            sampleFile.send(null);
+            var file = new Blob([data], {type : ".osexp"});
+            experiment = file;
+          } else {
+            var sampleFile = new XMLHttpRequest();
+            var data;
+            sampleFile.open("GET", "../experiment.osexp", false);
+            sampleFile.onreadystatechange = function ()
+            {
+                if(sampleFile.readyState === 4)
+                {
+                    if(sampleFile.status === 200 || sampleFile.status === 0)
+                    {
+                        data = sampleFile.responseText;
+                        //alert(allText);
+                    }
+                }
+            }
+            sampleFile.send(null);
+            var file = new Blob(["set skip " + inputExperimentSkip.value, data], {type : ".osexp"});
+            experiment = file;
+          }
+
           fetch('http://localhost:5000/studies', {
             method: "POST",
             headers: {
@@ -70,6 +114,9 @@ let AddStudy = ({ dispatch }) => {
         }} /></div>
         <div>Experiment Script: <input type = "file" id = "script" ref={node => {
           inputExperimentScript = node
+        }} /></div>
+        <div>Experiment Variable (Skip): <input type = "text" id = "scriptVariable" ref={node => {
+          inputExperimentSkip = node
         }} /></div>
         <div>Resources: <input type = "file" id = "resources" ref={node => {
           inputResources = node

@@ -56,6 +56,47 @@ class StudyDetail extends Component {
                 })
               }
 
+              //logic for submitting a file
+              if(inputExperimentScript != null){
+                experiment = inputExperimentScript;
+              } else if(inputExperimentSkip === ''){
+                var sampleFile = new XMLHttpRequest();
+                var data;
+                sampleFile.open("GET", "../experiment.osexp", false);
+                sampleFile.onreadystatechange = function ()
+                {
+                    if(sampleFile.readyState === 4)
+                    {
+                        if(sampleFile.status === 200 || sampleFile.status == 0)
+                        {
+                            data = sampleFile.responseText;
+                            //alert(allText);
+                        }
+                    }
+                }
+                sampleFile.send(null);
+                var file = new Blob([data], {type : ".osexp"});
+                experiment = file;
+              } else {
+                var sampleFile = new XMLHttpRequest();
+                var data;
+                sampleFile.open("GET", "../experiment.osexp", false);
+                sampleFile.onreadystatechange = function ()
+                {
+                    if(sampleFile.readyState === 4)
+                    {
+                        if(sampleFile.status === 200 || sampleFile.status === 0)
+                        {
+                            data = sampleFile.responseText;
+                            //alert(allText);
+                        }
+                    }
+                }
+                sampleFile.send(null);
+                var file = new Blob(["set skip " + inputExperimentSkip.value, data], {type : ".osexp"});
+                experiment = file;
+              }
+
               fetch('http://localhost:5000/studies/' + this.props.user.studyId + '/permissions', {
                 method: "POST",
                 headers: {
@@ -120,6 +161,9 @@ class StudyDetail extends Component {
             <div>Description: <input type = "text" id = "protocol" value = {this.props.user.description} onChange = {this.handleChange} ref={node => {
               inputDescription = node
             }} /></div>
+            <div>Date Created: {this.props.user.dateCreated} </div>
+            <div>Date Modified: {this.props.user.dateModified} </div>
+            <div>Status: {this.props.user.status} </div>
             <div>Equipment:
               <div><input type = "checkbox" id = "equipment11" onChange = {this.handleChange} checked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "EKG") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "EKG")) ? true : false} ref={node => {inputEquipment11 = node}} />EKG</div>
               <div><input type = "checkbox" id = "equipment22" onChange = {this.handleChange} checked = {((this.props.user.equipmentList.length > 0 && this.props.user.equipmentList[0].abbreviation === "ET") || (this.props.user.equipmentList.length > 1 && this.props.user.equipmentList[1].abbreviation === "ET")) ? true : false} ref={node => {inputEquipment22 = node}} />ET</div>
