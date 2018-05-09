@@ -1,23 +1,18 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {selectUser} from '../actions'
+import {selectStudy} from '../actions'
 
-class UserList extends React.Component {
+class StudyList extends React.Component {
 
 createListItems() {
-
-  return this.props.users.map((user) => {
+  return this.props.studies.map((study) => {
     return(
-      <li
-        key ={user.studyId}
-        onClick={() => this.props.selectUser(user)}
-      >
-        {user.studyId},
-        {user.name},
-        {user.dateCreated}
-      </li>
-          );
+      <tr key={study.studyId} onClick={()=>this.props.selectStudy(study)}>
+        <td><div> {study.name} </div></td>
+        <td><div> {study.dateCreated.slice(0,10)} </div></td>
+      </tr>
+    );
   });
 }
 
@@ -32,23 +27,29 @@ createListItems() {
     // -- Will only show in console, to work only uncomment in between -- //
 
           return (
-            <ul>
-            {this.createListItems()}
-            </ul>
+            <table class="study-table">
+              <thead>
+                <tr>
+                  <th> Name </th>
+                  <th> Date Created </th>
+                </tr>
+              </thead>
+              <tbody> {this.createListItems()} </tbody>
+            </table>
           );
       };
   }
 
 function mapStateToProps(state) {
   return {
-    users: state.studies,
+    studies: state.studies,
     booll: state.isViewingstudy
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectUser: selectUser}, dispatch)
+  return bindActionCreators({selectStudy: selectStudy}, dispatch)
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserList);
+export default connect(mapStateToProps, mapDispatchToProps)(StudyList);

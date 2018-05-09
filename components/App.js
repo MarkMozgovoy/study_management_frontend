@@ -41,37 +41,39 @@ class DashBoard extends React.Component {
       button = <AddStudyButton onClick={this.handleAddStudyClick} />;
     }
     return (
-
       <div>
-        <Greeting isAddingstudy={isAddingstudy} />
+        <h2> Study Management Dashboard </h2>
         {button}
+        <Greeting isAddingstudy={isAddingstudy} />
       </div>
     );
   }
 }
 
+/*
 function AddStudyContainer(props) {
   return <AddStudy />;
-}
+}*/
 // function ViewStudyContainer(props) {
 //   return <Studyview />;
 // }
+/*
 function ListOfStudiesContainer(props) {
   return <ListOfStudies />;
-}
+}*/
 
 function Greeting(props) {
   const isAddingstudy = props.isAddingstudy;
   // const isViewingstudy = props.isViewingstudy;
   if (isAddingstudy) {
-    return <AddStudyContainer />;
+    return <AddStudy />;
   }
-  return <ListOfStudiesContainer />;
+  return <ListOfStudies />;
 }
 
 function AddStudyButton(props) {
   return (
-    <button onClick={props.onClick}>
+    <button id="addStudyButton" onClick={props.onClick}>
       Create Study
     </button>
   );
@@ -94,14 +96,14 @@ function ListOfStudiesButton(props) {
 // -- applied conditional rendering -- //
 function mapStateToProps(state) {
   return {
-    user: state.activestudy
+    study: state.activestudy
   };
 }
 
 const App = () => (
   <div>
     <DashBoard />
-    <Studyview />
+    {/*<Studyview />*/}
   </div>
 )
 
