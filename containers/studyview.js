@@ -4,18 +4,11 @@ import ListOfDeployments from '../containers/listofdeployments'
 import AddDeployment from '../containers/AddDeployment'
 import { addStudy, clearState } from '../actions'
 
+import {bindActionCreators} from 'redux'
+
 
 class StudyDetail extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {value : ''};
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event){
-    this.setState({value: event.target.value});
-  }
 
   render() {
     let inputTitle
@@ -128,9 +121,9 @@ class StudyDetail extends Component {
                   .then((response) => {
                     console.log("Returned Studies", response); //returns all of johnbob's friends
                     studyArr = response;
-                    dispatch(clearState());
+                    dispatch(this.props.actions.clearState());
                     for (let i = 0; i < studyArr.length; i++){
-                      dispatch(addStudy(studyArr[i].name, studyArr[i].studyId, studyArr[i].dateCreated, studyArr[i].status,
+                      dispatch(this.props.actions.addStudy(studyArr[i].name, studyArr[i].studyId, studyArr[i].dateCreated, studyArr[i].status,
                         studyArr[i].dateModified, studyArr[i].description, studyArr[i].equipmentList, studyArr[i].deploymentList,
                          studyArr[i].archived))
                     }
@@ -177,4 +170,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(StudyDetail);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({clearState: clearState, addStudy: addStudy}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudyDetail);
