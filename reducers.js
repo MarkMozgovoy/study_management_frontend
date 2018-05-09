@@ -72,7 +72,7 @@ function studies(state = [], action) {
 // -- comment -- //
 function activestudy(state=null, action) {
   switch (action.type) {
-      case "USER_SELECTED":
+      case "STUDY_SELECTED":
         return action.payload;
         break;
   }

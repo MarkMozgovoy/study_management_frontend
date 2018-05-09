@@ -27,11 +27,11 @@ export function clearState(){
 
 //TODO add other actions as necessary
 
-export const selectUser = (user) => {
-  console.log("you clicked on user:", user.title);
+export const selectStudy = (study) => {
+  console.log("you clicked on study:", study.studyId);
   return {
-    type: "USER_SELECTED",
-    payload: user
+    type: "STUDY_SELECTED",
+    payload: study
   }
 }
 export const selectDeployment = (dplymnt) => {
